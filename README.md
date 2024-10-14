@@ -6,7 +6,7 @@
   - [Features](#features)
   - [To-do](#to-do)
   - [Installation](#installation)
-    - [Using lazy.nvim](https://github.com/folke/lazy.nvim)](#using-lazynvimhttpsgithubcomfolkelazynvim)
+    - [Using lazy.nvim](#using-lazynvim)
     - [Using Vim-Plug](#using-vim-plug)
   - [Setup](#setup)
   - [Configuration Options](#configuration-options)
