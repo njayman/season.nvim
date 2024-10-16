@@ -40,9 +40,6 @@ A lightweight Neovim plugin to manage session based on current working directory
     opts = {
         show_notifications = true, -- Enable or disable notifications (default: true)
     }
-    config = function()
-        require('season')
-    end
 }
 ```
 
