@@ -1,5 +1,7 @@
 Changelog
 ====================
+## v0.2.4
+8fb63e1 Fix session loader: wrap vim.cmd in function to satisfy lua_ls type checks
 ## v0.2.3
 b5bedea Improve session manager: safer JSON decoding and cleanup of load logic
 8750a50 Closes #2; Proper name and mention of License file
