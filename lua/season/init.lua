@@ -35,7 +35,8 @@ local function load_hashes()
 		local content = file:read("*a")
 		file.close(file)
 
-		return json.decode(content) or {}
+		local ok, data = pcall(json.decode, content)
+		return ok and data or {}
 	else
 		return {}
 	end

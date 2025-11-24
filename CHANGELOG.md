@@ -1,5 +1,8 @@
 Changelog
 ====================
+## v0.2.3
+b5bedea Improve session manager: safer JSON decoding and cleanup of load logic
+8750a50 Closes #2; Proper name and mention of License file
 ## v0.2.2
 59115a7 Closes #2; Proper name and mention of License file
 fbd37bb Merge pull request #1 from Kruziikrel13/patch-1
