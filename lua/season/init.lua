@@ -66,9 +66,32 @@ local function get_session_file()
 	return session_dir .. cwd_hash .. ".nvim"
 end
 
+-- Remove Oil buffers before saving session
+local function close_oil_buffers()
+	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+		local name = vim.api.nvim_buf_get_name(buf)
+		if name:match("^oil://") or name:match("/$") then
+			pcall(vim.cmd, "bd! " .. buf)
+		end
+	end
+end
+
+-- Remove unnamed buffers before saving
+local function close_unnamed_buffers()
+	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+		local name = vim.api.nvim_buf_get_name(buf)
+		if not name or name == "" then
+			pcall(vim.cmd, "bd! " .. buf)
+		end
+	end
+end
+
 -- Save or update the session.
 function M.save_session()
 	ensure_dir()
+	close_oil_buffers()
+	close_unnamed_buffers()
+
 	local session_file = get_session_file()
 	vim.cmd("mksession! " .. vim.fn.fnameescape(session_file))
 	notify("Session saved to: " .. session_file)
@@ -79,7 +102,9 @@ function M.load_session()
 	local session_file = get_session_file()
 
 	if uv.fs_stat(session_file) then
-		vim.cmd("source " .. vim.fn.fnameescape(session_file))
+		pcall(function(cmd)
+			vim.cmd(cmd)
+		end, "silent! source " .. vim.fn.fnameescape(session_file))
 		notify("Session loaded from: " .. session_file)
 	else
 		notify("No session found for this directory")
